@@ -1,0 +1,6 @@
+#!/bin/bash
+. ~/set-enviornment.sh
+
+echo "usage: courier orchistrator <verb>-<noun> <args>"
+echo "courier orchistrator is disabled for this demo enviornment"
+exit 1

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "usage: node skill delete-skill <skill name>"
+  exit 1;
+fi
+
+if [ -z "$2" ]; then
+  export status="OK"
+else
+  echo "error you must manually URL encode your skill name {$@}"
+  exit 1;
+fi
+
+curl -s  -X DELETE $PLATFORM_URL:$NODE_MANAGER_PORT/v1/skills/$1 | jq

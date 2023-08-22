@@ -1,0 +1,30 @@
+{
+    "targetNodeId": "--NODE-ID--",
+    "instanceId": "00000000-0000-0000-0000-000000000000",
+    "jobId": "00000000-0000-0000-0000-000000000000",
+    "reportingURL": "--REPORTING-URL--",
+    "actions": {
+        "steps": [
+            {
+                "interpreter": {
+                    "name": "chef/courier-interpreter/os/shell",
+                    "Version": "1.0"
+                },
+                "command": [
+                    "cp /root/.chef-nodeman/node_guid /home/ec2-user",
+                    "chown ec2-user /home/ec2-user/node_guid",
+                    "commit | true"
+                ],
+                "conditions": [],
+                "expectedInputs": {},
+                "failureBehavior": {},
+                "inputs": {},
+                "limits": {},
+                "outputFieldRules": [],
+                "retryCount": 1,
+                "stepNumber": 1
+            }
+        ],
+        "accessMode": "agent"
+    }
+}

@@ -1,0 +1,31 @@
+#!/bin/bash
+export CMD=""
+
+if [ -z "$1" ]; then
+  echo "usage: node skill <verb>-<noun> <args>"
+  exit 1
+fi
+
+if [ $1 == "list-skills" ]; then
+    export CMD="list-skills"
+fi
+
+if [ $1 == "register-skill" ]; then
+    export CMD="register-skill"
+fi
+
+if [ $1 == "delete-skill" ]; then
+    export CMD="delete-skill"
+fi
+
+if [ -z "$CMD" ]; then
+  echo "usage: node skill <verb>-<noun> <args>"
+  echo "$1 is Invalid action expected: <verb>-<noun>"
+  echo "Valid options:"
+  echo "list-skills"
+  echo "register-skill"
+  echo "delete-skill"
+  exit 1
+fi
+
+~/cmd/node_skill_$CMD "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9"

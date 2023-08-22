@@ -1,0 +1,8 @@
+#!/bin/bash
+. ~/set-enviornment.sh
+echo "usage: courier delivery list-channels"
+echo "WARNING: This feature is not supported by your message queue provider."
+echo "Courier delivery is configured with 0MQ (ZeroMQ)."
+echo ""
+echo "---- FALLING BACK TO NODE MANAGER FOR CHANNEL LIST ---"
+curl -s $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/ | jq '.data[] | .id'

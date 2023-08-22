@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  curl -s $PLATFORM_URL:$NODE_MANAGER_PORT/v1/skills/ | jq '.data[] | .name'
+  exit 0;
+fi
+
+if [ $1 == "--help" ]; then
+    echo "usage: node skill list-skills"
+    echo "Flags"
+    echo "--help"
+    echo "--json"
+    exit 0
+fi
+
+if [ $1 == "--json" ]; then
+  curl -s $PLATFORM_URL:$NODE_MANAGER_PORT/v1/skills/ | jq
+  exit 0
+fi

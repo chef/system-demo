@@ -1,0 +1,7 @@
+#will assign the required curl skill
+node node assign-skill <ID> Core-Curl 7.75.0 20211016163637
+
+#will generate an error as this is a not a valid skill
+node node assign-skill <ID> Core-Curl 7.75.1 20231016163637
+
+node node assign-skill <ID> Core-Curl 7.79.1 20220817113628

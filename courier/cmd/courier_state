@@ -1,0 +1,6 @@
+#!/bin/bash
+. ~/set-enviornment.sh
+
+echo "usage: courier state <verb>-<noun> <args>"
+echo "courier state is disabled for this demo enviornment"
+exit 1

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "usage: node node assign-skill <UUID> <SKILL> <RELEASE> <VERSION>"
+  exit 0;
+fi
+
+if [ -z "$2" ]; then
+  echo "usage: node node assign-skill $1 $2 <RELEASE> <VERSION>"
+  exit 0;
+fi
+
+if [ -z "$3" ]; then
+  echo "usage: node node assign-skill $1 $2 $3 <VERSION>"
+  exit 0;
+fi
+
+
+if [ -z "$5" ]; then
+  export status="OK"
+else
+  echo "error check your arguments to be sure you url encoded the skill $@"
+  exit 1;
+fi
+
+export BODY="{\"name\": \"$2\",\"canister\": {\"version\": \"$3\",\"release\": \"$4\"}}"
+#curl -s  -X POST -H 'Content-Type: application/json' $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/$1 -d '{"name": "$2","canister": {"release": "$3","version": "$4"}}'
+echo $BODY >> temp-payload.json
+curl -s -X POST -H 'Content-Type: application/json' $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/$1/skills -d @temp-payload.json | jq
+rm temp-payload.json

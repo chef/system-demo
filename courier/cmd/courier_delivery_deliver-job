@@ -1,0 +1,28 @@
+#!/bin/bash
+. ~/set-enviornment.sh
+if [ -z "$1" ]; then
+  echo "usage:courier delivery deliver-job <NODEID> <FILE>"
+  exit 1;
+fi
+
+if [ -z "$2" ]; then
+  echo "usage:courier delivery deliver-job $1 <FILE>"
+  exit 1;
+fi
+
+if [ "$3" == "--force" ]; then
+    export USER=$(id -u -n)
+    echo "WARNING: This delivery is being forced by $USER."
+    echo "this activity has been logged"
+
+    sed "s/--NODE-ID--/$1/g" $2 | sed "s/--REPORTING-URL--/${PLATFORM_URL//\//\\/}:$COURIER_STATE_PORT/g" >> temp-payload.json
+    curl -s -X POST -H "Content-Type: application/json" -d @temp-payload.json $PLATFORM_URL:$COURIER_DELIVERY_PORT/channel/$1
+    rm temp-payload.json
+else
+    echo "WARNING: This feature is for administrative overrides and should not be used directly without extreme caution."
+    export USER=$(id -u -n)
+    echo "This attempted delivery by $USER has been logged"
+    echo "Command Aborted." 
+fi
+
+#curl -s -X POST -H "Content-Type: application/json" -d @$1 $PLATFORM_URL:$NODE_MANAGER_PORT/v1/skills/ | jq

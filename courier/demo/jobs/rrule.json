@@ -1,0 +1,39 @@
+{
+    "name": "every_1_min",
+    "description": "scan and remediate",
+    "immediate": false,
+    "scheduleRule": "RRULE:FREQ=MINUTELY;COUNT=10;INTERVAL=1",
+    "target": {
+        "conditions": [],
+        "nodes": [
+            "1758abcb-697d-49be-a4d4-9cab9b7c9873",
+            "f62c9428-07ed-4b1a-ad08-896fdce846ff",
+            "a3e9309c-dcad-486f-9ad9-bd23b69ab033",
+            "8777c3f9-844e-45b4-bc06-d35241c3e24f"
+        ]
+    },
+    "actions": {
+        "steps": [
+            {
+                "interpreter": {
+                    "name": "chef/courier-interpreter/os/shell",
+                    "Version": "1.0"
+                },
+                "command": [
+                    "date",
+                    "commit | true"
+                ],
+                "conditions": [],
+                "expectedInputs": {},
+                "failureBehavior": {},
+                "inputs": {},
+                "limits": {},
+                "outputFieldRules": [],
+                "retryCount": 1,
+                "stepNumber": 1
+            }
+        ],
+        "accessMode": "agent"
+    },
+    "timeoutSeconds": 300
+}

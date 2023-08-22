@@ -1,0 +1,10 @@
+{
+  "name": "Chef-InSpec",
+  "canister": {
+    "origin": "chef",
+    "name": "inspec"
+  },
+  "native": {
+    "version_command": "inspec --version"
+  }
+}

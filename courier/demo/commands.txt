@@ -1,0 +1,11 @@
+Agent - 3
+node node assign-skill 73b3b684-5615-4956-98c6-0f416fec02ee Chef-Client 18.2.44 20230801012717
+
+
+SSH into server
+start the monitor
+courier scheduler create-job ./jobs/next_available_run.json 
+courier scheduler create-job ./jobs/rrule.json 
+
+SSH into Agen-1, start service
+courier delivery deliver-job 1758abcb-697d-49be-a4d4-9cab9b7c9873 ./jobs/delivery_job.json --force

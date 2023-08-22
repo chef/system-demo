@@ -1,0 +1,37 @@
+#!/bin/bash
+. ~/set-enviornment.sh
+
+export CMD=""
+
+if [ -z "$1" ]; then
+  echo "usage: courier <service> <verb>-<noun> <args>"
+  exit 1
+fi
+
+if [ $1 == "scheduler" ]; then
+    export CMD="scheduler"
+fi
+
+if [ $1 == "state" ]; then
+    export CMD="state"
+fi
+
+if [ $1 == "orchestrator" ]; then
+    export CMD="orchestrator"
+fi
+
+if [ $1 == "delivery" ]; then
+    export CMD="delivery"
+fi
+
+if [ -z "$CMD" ]; then
+  echo "$1 is Invalid service"
+  echo "Valid options:"
+  echo "scheduler"
+  echo "state"
+  echo "orchestrator"
+  echo "delivery"
+  exit 1
+fi
+
+~/cmd/courier_$CMD "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9"

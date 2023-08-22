@@ -1,0 +1,21 @@
+#!/bin/bash
+. ~/set-enviornment.sh
+export CMD=""
+
+if [ -z "$1" ]; then
+  curl -s $PLATFORM_URL:$COURIER_SCHEDULER_PORT/jobs | jq -c '.[] | { id: .id, name: .name, executions: .ExecutionCount, immediate: .immediate, schedule: .scheduleRule }'
+  exit 0;
+fi
+
+if [ $1 == "--help" ]; then
+    echo "usage: courier scheduler list-jobs"
+    echo "Flags"
+    echo "--help"
+    echo "--json"
+    exit 0
+fi
+
+if [ $1 == "--json" ]; then
+  curl -s $PLATFORM_URL:$COURIER_SCHEDULER_PORT/jobs | jq 
+  exit 0
+fi

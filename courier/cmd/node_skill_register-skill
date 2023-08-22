@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "usage: node skill register-skill <filename>"
+  exit 1;
+fi
+
+if test -f "$1"; then
+    export STATUS="OK"
+else
+  echo "file $1 not found"
+  exit 1;
+fi
+
+curl -s -X POST -H "Content-Type: application/json" -d @$1 $PLATFORM_URL:$NODE_MANAGER_PORT/v1/skills/ | jq

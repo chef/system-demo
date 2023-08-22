@@ -1,0 +1,27 @@
+#!/bin/bash
+. ~/set-enviornment.sh
+
+export CMD=""
+
+if [ -z "$1" ]; then
+  echo "usage: node <service> <verb>-<noun> <args>"
+  exit 1
+fi
+
+if [ $1 == "skill" ]; then
+    export CMD="skill"
+fi
+
+if [ $1 == "node" ]; then
+    export CMD="node"
+fi
+
+if [ -z "$CMD" ]; then
+  echo "$1 is Invalid service"
+  echo "Valid options:"
+  echo "skill"
+  echo "node"
+  exit 1
+fi
+
+~/cmd/node_$CMD "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9"

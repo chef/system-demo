@@ -1,0 +1,45 @@
+{
+    "name": "Next-Available-Run",
+    "description": "demo job",
+    "immediate": true,
+    "scheduleRule": "",
+    "target": {
+        "conditions": [],
+        "nodes": ["73b3b684-5615-4956-98c6-0f416fec02ee", "b2aaffe1-cfc5-49e0-9ed8-45f9f7454600"]
+    },
+    "actions": {
+        "accessMode": "agent",
+        "steps": [
+            {
+                "stepNumber": 1,
+                "interpreter": {
+                    "name": "chef/courier-interpreter/os/shell",
+                    "Version": "1.0"
+                },
+                "command": [
+                    "find / -name courier.yaml",
+                    "commit | true"
+                ],
+                "inputs": { },
+                "expectedInputs": { },
+                "outputFieldRules": [ ],
+                "retryCount": 2,
+                "failureBehavior": {
+                    "action": "retryThenFail",
+                    "retryBackoffStrategy": {
+                        "name": "none",
+                        "delaySeconds": 0,
+                        "arguments": [
+                            1,
+                            3,
+                            5
+                        ]
+                    }
+                },
+                "limits": {},
+                "conditions": []
+            }
+        ]
+    },
+    "timeoutSeconds": 300
+}

@@ -1,0 +1,29 @@
+node node assign-skill <ID> Core-Curl 7.75.0 20211016163637
+node node assign-skill 6b154d4a-75b6-47ea-8195-23e52d8ccf29 Core-Curl 7.75.0 20211016163637
+
+
+##Boot new machines
+sudo hab license accept
+
+sudo /opt/agent/node-management/configure.sh 3.128.94.111:9676
+sudo systemctl enable node-management
+sudo systemctl start node-management
+sudo systemctl status node-management
+
+sudo echo "Node Management ID is $(sudo cat /root/.chef-nodeman/node_guid)"
+
+sudo /opt/agent/courier/configure.sh $(sudo cat /root/.chef-nodeman/node_guid) 3.128.94.111:5563 3.128.94.111:8082 
+sudo /opt/agent/courier/verbose.sh 
+sudo systemctl enable courier
+sudo systemctl start courier
+sudo systemctl status courier
+sudo echo "Node Management ID is $(sudo cat /root/.chef-nodeman/node_guid)"
+
+#### FROM CONSOLE
+chef courier delivery deliver-job XXXXXXX jobs/verify-agent.json --force
+
+sudo echo "Node Management ID is $(cat ~/node_guid)"
+
+journalctl -f -u courier.service
+
+

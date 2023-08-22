@@ -1,0 +1,15 @@
+#!/bin/bash
+. ~/set-enviornment.sh
+export CMD=""
+
+if [ -z "$1" ]; then
+  echo "usage: courier scheduler peek-job <UUID>"
+  exit 0;
+fi
+
+if [ $(curl -LI -X HEAD $PLATFORM_URL:$COURIER_SCHEDULER_PORT/job/$1 -o /dev/null -w '%{http_code}\n' -s) == "200" ]; then 
+  echo "exists"; 
+else
+  echo "not found"; 
+fi
+

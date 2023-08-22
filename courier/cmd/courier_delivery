@@ -1,0 +1,44 @@
+#!/bin/bash
+. ~/set-enviornment.sh
+export CMD=""
+
+if [ -z "$1" ]; then
+  echo "usage: courier delivery <verb>-<noun> <args>"
+  exit 1
+fi
+
+if [ $1 == "establish-channel" ]; then
+    export CMD="establish-channel"
+fi
+
+if [ $1 == "list-channels" ]; then
+    export CMD="list-channels"
+fi
+
+
+if [ $1 == "get-channel" ]; then
+    export CMD="get-channel"
+fi
+
+if [ $1 == "delete-channel" ]; then
+    export CMD="delete-channel"
+fi
+
+if [ $1 == "deliver-job" ]; then
+    export CMD="deliver-job"
+fi
+
+if [ -z "$CMD" ]; then
+  echo "usage: courier delivery <verb>-<noun> <args>"
+  echo "$1 is Invalid action expected: <verb>-<noun>"
+  echo "Valid options:"
+  echo "establish-channel"
+  echo "list-channels"
+  echo "get-channel"
+  echo "list-skills"
+  echo "delete-channel"
+  echo "deliver-job"
+  exit 1
+fi
+
+~/cmd/courier_delivery_$CMD "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9"

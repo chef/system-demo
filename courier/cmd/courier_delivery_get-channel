@@ -1,0 +1,6 @@
+#!/bin/bash
+. ~/set-enviornment.sh
+echo "usage: courier delivery get-channel <NODEID>"
+echo "This feature is not supported by your message queue provider."
+echo "Courier delivery is configured with 0MQ (ZeroMQ)."
+exit 1

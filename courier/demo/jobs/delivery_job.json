@@ -1,0 +1,31 @@
+{
+    "targetNodeId": "--NODE-ID--",
+    "instanceId": "00000000-0000-0000-0000-000000000000",
+    "jobId": "00000000-0000-0000-0000-000000000000",
+    "reportingURL": "--REPORTING-URL--",
+    "actions": {
+        "steps": [
+            {
+                "interpreter": {
+                    "name": "chef/courier-interpreter/os/shell",
+                    "Version": "1.0"
+                },
+                "command": [
+                    "ps > process.txt",
+                    "aws s3 cp process.txt s3://demo-artifacts-8349",
+                    "rm process.txt",
+                    "commit | true"
+                ],
+                "conditions": [],
+                "expectedInputs": {},
+                "failureBehavior": {},
+                "inputs": {},
+                "limits": {},
+                "outputFieldRules": [],
+                "retryCount": 1,
+                "stepNumber": 1
+            }
+        ],
+        "accessMode": "agent"
+    }
+}

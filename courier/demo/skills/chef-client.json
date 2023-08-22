@@ -1,0 +1,10 @@
+{
+  "name": "Chef-Client",
+  "canister": {
+    "origin": "chef",
+    "name": "chef-infra-client"
+  },
+  "native": {
+    "version_command": "chef-client --version"
+  }
+}

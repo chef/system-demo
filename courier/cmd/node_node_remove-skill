@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "usage: node node remove-skill <UUID> <ID>"
+  exit 0;
+fi
+
+if [ -z "$2" ]; then
+  echo "usage: node node remove-skill $1 <ID>"
+  exit 0;
+fi
+
+curl -s -X DELETE -H 'Content-Type: application/json' $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/$1/skills/$2 | jq

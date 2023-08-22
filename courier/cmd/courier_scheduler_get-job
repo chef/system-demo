@@ -1,0 +1,37 @@
+#!/bin/bash
+. ~/set-enviornment.sh
+export CMD=""
+
+if [ -z "$1" ]; then
+  echo "usage: courier scheduler get-job <UUID>"
+  exit 0;
+fi
+
+
+if [ $1 == "--help" ]; then
+    echo "usage: courier scheduler get-job <UUID>"
+    echo "Flags"
+    echo "--help"
+    echo "--json"
+    exit 0
+fi
+
+if [ "$2" == "--json" ]; then
+  curl -s $PLATFORM_URL:$COURIER_SCHEDULER_PORT/job/$1 | jq
+  exit 0
+fi
+
+if [ "$2" == "--help" ]; then
+    echo "usage: courier scheduler get-job $1"
+    echo "Flags"
+    echo "--help"
+    echo "--json"
+    exit 0
+fi
+
+if [ -z "$1" ]; then
+    export status="OK"
+else
+  curl -s $PLATFORM_URL:$COURIER_SCHEDULER_PORT/job/$1 | jq '{ id: .id, name: .name, targets: .target}'
+  exit 0;
+fi
