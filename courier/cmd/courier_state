@@ -1,5 +1,9 @@
 #!/bin/bash
-. ~/set-enviornment.sh
+if [ -z "$PLATFORM_URL" ]; then
+  echo "PLATFORM_URL is not configured"
+  exit 1
+fi
+
 
 echo "usage: courier state <verb>-<noun> <args>"
 echo "courier state is disabled for this demo enviornment"

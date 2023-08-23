@@ -1,5 +1,9 @@
 #!/bin/bash
 export CMD=""
+if [ -z "$PLATFORM_URL" ]; then
+  echo "PLATFORM_URL is not configured"
+  exit 1
+fi
 
 if [ -z "$1" ]; then
   echo "usage: node skill <verb>-<noun> <args>"
@@ -28,4 +32,4 @@ if [ -z "$CMD" ]; then
   exit 1
 fi
 
-~/cmd/node_skill_$CMD "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9"
+/opt/demo/node_skill_$CMD "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9"

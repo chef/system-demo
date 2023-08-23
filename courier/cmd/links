@@ -1,3 +1,0 @@
-ln -s /home/ec2-user/cmd/chef /usr/bin/
-ln -s /home/ec2-user/cmd/node /usr/bin/
-ln -s /home/ec2-user/cmd/courier /usr/bin/

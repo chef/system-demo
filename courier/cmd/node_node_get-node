@@ -1,4 +1,8 @@
 #!/bin/bash
+if [ -z "$PLATFORM_URL" ]; then
+  echo "PLATFORM_URL is not configured"
+  exit 1
+fi
 
 if [ -z "$1" ]; then
   echo "usage: node node get-node <UUID>"

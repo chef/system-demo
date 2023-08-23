@@ -1,5 +1,9 @@
 #!/bin/bash
-. ~/set-enviornment.sh
+if [ -z "$PLATFORM_URL" ]; then
+  echo "PLATFORM_URL is not configured"
+  exit 1
+fi
+
 export CMD=""
 
 if [ -z "$1" ]; then

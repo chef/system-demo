@@ -1,0 +1,7 @@
+{
+  "name": "Core-Curl",
+  "canister": {
+    "origin": "core",
+    "name": "curl"
+  }
+}

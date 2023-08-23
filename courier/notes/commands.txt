@@ -5,3 +5,5 @@ node node assign-skill <ID> Core-Curl 7.75.0 20211016163637
 node node assign-skill <ID> Core-Curl 7.75.1 20231016163637
 
 node node assign-skill <ID> Core-Curl 7.79.1 20220817113628
+
+chef courier delivery deliver-job XXXXXXX jobs/verify-agent.json --force

@@ -1,0 +1,10 @@
+{
+  "name": "Name",
+  "canister": {
+    "origin": "STRING",
+    "name": "STRING"
+  },
+  "native": {
+    "version_command": "COMMAND"
+  }
+}

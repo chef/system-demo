@@ -1,5 +1,8 @@
 #!/bin/bash
-. ~/set-enviornment.sh
+if [ -z "$PLATFORM_URL" ]; then
+  echo "PLATFORM_URL is not configured"
+  exit 1
+fi
 
 echo "usage: courier orchistrator <verb>-<noun> <args>"
 echo "courier orchistrator is disabled for this demo enviornment"

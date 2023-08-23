@@ -1,6 +1,9 @@
 #!/bin/bash
-. ~/set-enviornment.sh
 export CMD=""
+if [ -z "$PLATFORM_URL" ]; then
+  echo "PLATFORM_URL is not configured"
+  exit 1
+fi
 
 if [ -z "$1" ]; then
   echo "usage: courier scheduler <verb>-<noun> <args>"
@@ -48,4 +51,4 @@ if [ -z "$CMD" ]; then
   echo "estimate-schedule"
 fi
 
-~/cmd/courier_scheduler_$CMD "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9"
+/opt/demo/courier_scheduler_$CMD "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9"

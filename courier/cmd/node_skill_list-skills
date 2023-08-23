@@ -1,4 +1,8 @@
 #!/bin/bash
+if [ -z "$PLATFORM_URL" ]; then
+  echo "PLATFORM_URL is not configured"
+  exit 1
+fi
 
 if [ -z "$1" ]; then
   curl -s $PLATFORM_URL:$NODE_MANAGER_PORT/v1/skills/ | jq '.data[] | .name'
