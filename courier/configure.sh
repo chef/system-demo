@@ -20,8 +20,8 @@ cp -R demos/ ../../demos
 
 chmod -R a+r /home/ec2-user/content
 chmod -R a+r /home/ec2-user/notes
-chmod a+r /home/ec2-user/instructions
-chmod a+r /home/ec2-user/commands
+chmod a+r /home/ec2-user/instructions.txt
+chmod a+r /home/ec2-user/commands.txt
 chown -R ec2-user:ec2-user /home/ec2-user/content
 chown -R ec2-user:ec2-user /home/ec2-user/notes
 chown -R ec2-user:ec2-user /home/ec2-user/instructions.txt
