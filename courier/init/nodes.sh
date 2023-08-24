@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xe   
 echo "waiting for node API to be online"
 curl --retry 18 --retry-delay 10 -s -o /dev/null "http://192.168.0.10:9676/v1/nodes/"              
 function find() {
