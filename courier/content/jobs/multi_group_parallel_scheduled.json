@@ -1,0 +1,87 @@
+{
+    "name":"multi_group_parallel_scheduled",
+    "description": "An integration test: demonstrating one group batch size fixed 5",
+    "immediate": false,
+    "scheduleRule": "RRULE:FREQ=SECONDLY;INTERVAL=120;COUNT=2",
+    "exceptionRules":[],
+    "target": {
+            "executionType": "parallel",
+            "groups":[
+                {
+                    "timeoutSeconds": 60,
+                    "batchSize": {
+                        "type": "number",
+                        "value": 1
+                    },
+                    "distributionMethod":"rolling",
+                    "successCriteria": [{ "numRuns": { "type": "percent", "value": 100 }, "status": "success" }],
+                    "nodeListType":"nodes",
+                    "nodeIdentifiers":[
+                        "--NODE1--",
+                        "--NODE2--",
+                        "--NODE3--"
+                    ] 
+                },
+                {
+                    "timeoutSeconds": 400,
+                    "batchSize": {
+                        "type": "number",
+                        "value": 1
+                    },
+                    "distributionMethod":"rolling",
+                    "successCriteria": [{ "numRuns": { "type": "percent", "value": 100 }, "status": "success" }],
+                    "nodeListType":"nodes",
+                    "nodeIdentifiers":[
+                        "--NODE4--",
+                        "--NODE5--",
+                        "--NODE6--"
+                    ] 
+                },
+                {
+                    "timeoutSeconds": 400,
+                    "batchSize": {
+                        "type": "number",
+                        "value": 3
+                    },
+                    "distributionMethod":"rolling",
+                    "successCriteria": [{ "numRuns": { "type": "percent", "value": 100 }, "status": "success" }],
+                    "nodeListType":"nodes",
+                    "nodeIdentifiers":[
+                        "--NODE7--",
+                        "--NODE8--",
+                        "--NODE9--"
+                    ] 
+                }
+            ]
+        },
+    "actions": {
+            "accessMode": "agent",
+            "steps": 
+            [
+                {
+                    "stepNumber": 1,
+                    "interpreter": {
+                        "name": "chef/courier-interpreter/os/shell"
+                    },
+                    "command": [
+                        "sleep 10"
+                    ],
+                    "inputs": {},
+                    "expectedInputs": { },
+                    "stepOutputFieldRules": {},
+                    "retryCount": 2,
+                    "failureBehavior": {
+                        "action": "retryThenFail",
+                        "retryBackoffStrategy": {
+                            "name": "none",
+                            "delaySeconds": 0,
+                            "arguments": [1,3,5]
+                        }
+                    },
+                    "limits": {},
+                    "conditions": []
+                }
+            ]
+        },
+    "timeoutSeconds": 300
+}

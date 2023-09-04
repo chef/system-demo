@@ -39,7 +39,13 @@ chmod a+r /home/ec2-user/instructions.txt
 chmod a+r /home/ec2-user/commands.txt
 
 echo "init nodes"
+chmod +x /home/ec2-user/system-demo/courier/init/nodes.sh
 /home/ec2-user/system-demo/courier/init/nodes.sh $1
 
 echo "init skills"
+chmod +x /home/ec2-user/system-demo/courier/init/skills.sh
 /home/ec2-user/system-demo/courier/init/skills.sh $1
+
+echo "init demo-jobs"
+chmod +x /home/ec2-user/system-demo/courier/init/demo-jobs.sh
+/home/ec2-user/system-demo/courier/init/demo-jobs.sh $1

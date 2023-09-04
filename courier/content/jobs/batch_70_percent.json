@@ -1,0 +1,56 @@
+{
+    "name":"batch_1_group_70_percent",
+    "description": "An integration test: demonstrating one group batch size 70%",
+    "immediate": true,
+    "exceptionRules":[],
+    "target": {
+            "executionType": "sequential",
+            "groups":[
+                {
+                    "timeoutSeconds": 60,
+                    "batchSize": {
+                        "type": "percent",
+                        "value": 70
+                    },
+                    "distributionMethod":"batching",
+                    "successCriteria": [{ "numRuns": { "type": "percent", "value": 100 }, "status": "success" }],
+                    "nodeListType":"nodes",
+                    "nodeIdentifiers":[
+                        "--NODE1--",
+                        "--NODE2--",
+                        "--NODE3--"
+                    ] 
+                }
+            ]
+        },
+    "actions": {
+            "accessMode": "agent",
+            "steps": 
+            [
+                {
+                    "stepNumber": 1,
+                    "interpreter": {
+                        "name": "chef/courier-interpreter/os/shell"
+                    },
+                    "command": [
+                        "sleep 10"
+                    ],
+                    "inputs": {},
+                    "expectedInputs": { },
+                    "stepOutputFieldRules": {},
+                    "retryCount": 2,
+                    "failureBehavior": {
+                        "action": "retryThenFail",
+                        "retryBackoffStrategy": {
+                            "name": "none",
+                            "delaySeconds": 0,
+                            "arguments": [1,3,5]
+                        }
+                    },
+                    "limits": {},
+                    "conditions": []
+                }
+            ]
+        },
+    "timeoutSeconds": 300
+}
