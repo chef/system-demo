@@ -1,0 +1,185 @@
+{
+    "name":"job6_9_groups_sequential",
+    "description": "scan and remediate",
+    "immediate": true,
+    "exceptionRules":[],
+    "target":{
+            "executionType": "sequential",
+            "groups":[{
+                "timeoutSeconds": 160,
+                "batchSize": {
+                    "type": "number",
+                    "value": 3
+                },
+                "distributionMethod":"batching",
+                "successCriteria": [{ "numRuns": { "type": "percent", "value": 100 }, "status": "success" }],
+                "nodeListType":"nodes",
+                "nodeIdentifiers":["--NODE1--"] 
+                },
+                {
+                "timeoutSeconds": 160,
+                "batchSize": {
+                    "type": "number",
+                    "value": 3
+                },
+                "distributionMethod":"batching",
+                "successCriteria": [{ "numRuns": { "type": "percent", "value": 100 }, "status": "success" }],
+                "nodeListType":"nodes",
+                "nodeIdentifiers":["--NODE2--"] 
+                },
+                {
+                "timeoutSeconds": 160,
+                "batchSize": {
+                    "type": "number",
+                    "value": 3
+                },
+                "distributionMethod":"batching",
+                "successCriteria": [{ "numRuns": { "type": "percent", "value": 100 }, "status": "success" }],
+                "nodeListType":"nodes",
+                "nodeIdentifiers":["--NODE3--"] 
+                },
+                {
+                "timeoutSeconds": 160,
+                "batchSize": {
+                    "type": "number",
+                    "value": 3
+                },
+                "distributionMethod":"batching",
+                "successCriteria": [{ "numRuns": { "type": "percent", "value": 100 }, "status": "success" }],
+                "nodeListType":"nodes",
+                "nodeIdentifiers":["--NODE4--"] 
+                },
+                {
+                "timeoutSeconds": 160,
+                "batchSize": {
+                    "type": "number",
+                    "value": 3
+                },
+                "distributionMethod":"batching",
+                "successCriteria": [{ "numRuns": { "type": "percent", "value": 100 }, "status": "success" }],
+                "nodeListType":"nodes",
+                "nodeIdentifiers":["--NODE5--"] 
+                },
+                {
+                "timeoutSeconds": 160,
+                "batchSize": {
+                    "type": "number",
+                    "value": 3
+                },
+                "distributionMethod":"batching",
+                "successCriteria": [{ "numRuns": { "type": "percent", "value": 100 }, "status": "success" }],
+                "nodeListType":"nodes",
+                "nodeIdentifiers":["--NODE6--"] 
+                },
+                {
+                "timeoutSeconds": 160,
+                "batchSize": {
+                    "type": "number",
+                    "value": 3
+                },
+                "distributionMethod":"batching",
+                "successCriteria": [{ "numRuns": { "type": "percent", "value": 100 }, "status": "success" }],
+                "nodeListType":"nodes",
+                "nodeIdentifiers":["--NODE7--"] 
+                },
+                {
+                "timeoutSeconds": 160,
+                "batchSize": {
+                    "type": "number",
+                    "value": 3
+                },
+                "distributionMethod":"batching",
+                "successCriteria": [{ "numRuns": { "type": "percent", "value": 100 }, "status": "success" }],
+                "nodeListType":"nodes",
+                "nodeIdentifiers":["--NODE8--"] 
+                },
+                {
+                "timeoutSeconds": 160,
+                "batchSize": {
+                    "type": "number",
+                    "value": 3
+                },
+                "distributionMethod":"batching",
+                "successCriteria": [{ "numRuns": { "type": "percent", "value": 100 }, "status": "success" }],
+                "nodeListType":"nodes",
+                "nodeIdentifiers":["--NODE9--"] 
+                }
+            ]
+        },
+    "actions": {
+            "accessMode": "agent",
+            "steps": 
+            [
+                {
+                    "stepNumber": 1,
+                    "interpreter": {
+                        "name": "chef/courier-interpreter/os/shell"
+                    },
+                    "command": [
+                        "true || \"successfully update service\""
+                    ],
+                    "inputs": {},
+                    "expectedInputs": { },
+                    "stepOutputFieldRules": {},
+                    "retryCount": 2,
+                    "failureBehavior": {
+                        "action": "retryThenFail",
+                        "retryBackoffStrategy": {
+                            "name": "none",
+                            "delaySeconds": 0,
+                            "arguments": [1,3,5]
+                        }
+                    },
+                    "limits": {},
+                    "conditions": []
+                },
+                {
+                    "stepNumber": 1,
+                    "interpreter": {
+                        "name": "chef/courier-interpreter/os/shell"
+                    },
+                    "command": [
+                        "sleep 10"
+                    ],
+                    "inputs": {},
+                    "expectedInputs": { },
+                    "stepOutputFieldRules": {},
+                    "retryCount": 2,
+                    "failureBehavior": {
+                        "action": "retryThenFail",
+                        "retryBackoffStrategy": {
+                            "name": "none",
+                            "delaySeconds": 0,
+                            "arguments": [1,3,5]
+                        }
+                    },
+                    "limits": {},
+                    "conditions": []
+                },
+                {
+                    "stepNumber": 1,
+                    "interpreter": {
+                        "name": "chef/courier-interpreter/os/shell"
+                    },
+                    "command": [
+                        "[[ \"$HOSTNAME\" != \"ip-192-168-\"*\"-10\"* ]] || (exit 1)"
+                    ],
+                    "inputs": {},
+                    "expectedInputs": { },
+                    "stepOutputFieldRules": {},
+                    "retryCount": 2,
+                    "failureBehavior": {
+                        "action": "retryThenFail",
+                        "retryBackoffStrategy": {
+                            "name": "none",
+                            "delaySeconds": 0,
+                            "arguments": [1,3,5]
+                        }
+                    },
+                    "limits": {},
+                    "conditions": []
+                }
+            ]
+        },
+    "timeoutSeconds": 300
+}
