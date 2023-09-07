@@ -1,0 +1,24 @@
+#!/bin/bash
+if [ -z "$PLATFORM_URL" ]; then
+  echo "PLATFORM_URL is not configured"
+  exit 1
+fi
+
+if [ -z "$1" ]; then
+  curl -s $PLATFORM_URL:$COURIER_ORCHESTRATOR_PORT/JobInstance
+  exit 0;
+fi
+
+
+if [ $1 == "--help" ]; then
+    echo "usage: courier scheduler running-jobs"
+    echo "Flags"
+    echo "--help"
+    echo "--json"
+    exit 0
+fi
+
+if [ "$1" == "--json" ]; then                        
+  curl -s $PLATFORM_URL:$COURIER_ORCHESTRATOR_PORT/JobInstance | jq
+  exit 0
+fi

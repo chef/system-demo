@@ -1,5 +1,5 @@
 {
-  "name": "Chef-Client",
+  "name": "chef-client",
   "canister": {
     "origin": "chef",
     "name": "chef-infra-client"

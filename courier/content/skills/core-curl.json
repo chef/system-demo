@@ -1,5 +1,5 @@
 {
-  "name": "Core-Curl",
+  "name": "core-curl",
   "canister": {
     "origin": "core",
     "name": "curl"

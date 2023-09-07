@@ -1,0 +1,31 @@
+#!/bin/bash
+if [ -z "$PLATFORM_URL" ]; then
+  echo "PLATFORM_URL is not configured"
+  exit 1
+fi
+
+export CMD=""
+
+if [ -z "$1" ]; then
+  curl -s $PLATFORM_URL:$COURIER_STATE_PORT/state/jobInstance | jq -c '.[] | { id: .id, job_id: .job_id, status: .status, abandon_ct: .abandon_ct, fail_ct: .fail_ct, success_ct: .success_ct }'
+  exit 0;
+fi
+
+if [ $1 == "--help" ]; then
+    echo "usage: courier state list-job-instances"
+    echo "Flags"
+    echo "--help"
+    echo "--json"
+    echo "--raw"
+    exit 0
+fi
+
+if [ $1 == "--json" ]; then
+  curl -s $PLATFORM_URL:$COURIER_STATE_PORT/state/jobInstance | jq 
+  exit 0
+fi
+
+if [ $1 == "--raw" ]; then
+  curl -s $PLATFORM_URL:$COURIER_STATE_PORT/state/jobInstance
+  exit 0
+fi

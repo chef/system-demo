@@ -1,5 +1,5 @@
 {
-  "name": "Chef-InSpec",
+  "name": "chef-inspec",
   "canister": {
     "origin": "chef",
     "name": "inspec"

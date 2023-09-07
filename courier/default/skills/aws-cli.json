@@ -1,5 +1,5 @@
 {
-    "name": "AWS-CLI",
+    "name": "aws-cli",
     "native": {
       "version_command": "aws --version |cut -d ' ' -f1|tr '\n' ' '"
     }

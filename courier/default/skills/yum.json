@@ -1,5 +1,5 @@
 {
-    "name": "Yum",
+    "name": "yum",
     "native": {
       "version_command": "yum --version |cut -d ' ' -f1|tr '\n' ' ' | xargs"
     }
