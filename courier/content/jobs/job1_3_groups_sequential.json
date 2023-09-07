@@ -68,7 +68,7 @@
                     "conditions": []
                 },
                 {
-                    "stepNumber": 1,
+                    "stepNumber": 2,
                     "interpreter": {
                         "name": "chef/courier-interpreter/os/shell"
                     },
@@ -91,7 +91,7 @@
                     "conditions": []
                 },
                 {
-                    "stepNumber": 1,
+                    "stepNumber": 3,
                     "interpreter": {
                         "name": "chef/courier-interpreter/os/shell"
                     },
@@ -103,7 +103,7 @@
                     "stepOutputFieldRules": {},
                     "retryCount": 2,
                     "failureBehavior": {
-                        "action": "retryThenFail",
+                        "action": "retryThenIgnore",
                         "retryBackoffStrategy": {
                             "name": "none",
                             "delaySeconds": 0,
