@@ -36,7 +36,7 @@ done
 
 shopt -s globstar
 FILES="/home/ec2-user/demos/**/*.json"
-for i in **/*.json; do # Whitespace-safe and recursive
+for i in $FILES; do # Whitespace-safe and recursive
   if [ -f "$f" ]
   then
     sed -i "s/--NODE1--/$NODE1/g" $f
