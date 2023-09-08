@@ -29,3 +29,6 @@ if [ $1 == "--raw" ]; then
   curl -s $PLATFORM_URL:$COURIER_STATE_PORT/state/jobInstance
   exit 0
 fi
+
+export JobID=$1
+curl -s $PLATFORM_URL:$COURIER_STATE_PORT/state/jobInstance | jq -c '.[] | select(.job_id==env.JobID) | { id: .id, job_id: .job_id, status: .status, abandon_ct: .abandon_ct, fail_ct: .fail_ct, success_ct: .success_ct }'

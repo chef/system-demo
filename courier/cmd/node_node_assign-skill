@@ -30,5 +30,5 @@ fi
 export BODY="{\"name\": \"$2\",\"canister\": {\"version\": \"$3\",\"release\": \"$4\"}}"
 #curl -s  -X POST -H 'Content-Type: application/json' $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/$1 -d '{"name": "$2","canister": {"release": "$3","version": "$4"}}'
 echo $BODY >> temp-payload.json
-curl -s -X POST -H 'Content-Type: application/json' $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/$1/skills -d @temp-payload.json | jq
+curl -s -X PUT -H 'Content-Type: application/json' $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/$1/skills/add -d @temp-payload.json | jq
 rm temp-payload.json

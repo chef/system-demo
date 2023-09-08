@@ -33,3 +33,20 @@ do
     sed -i "s/--NODE9--/$NODE9/g" $f
   fi
 done
+
+shopt -s globstar
+FILES="/home/ec2-user/demos/**/*.json"
+for i in **/*.json; do # Whitespace-safe and recursive
+  if [ -f "$f" ]
+  then
+    sed -i "s/--NODE1--/$NODE1/g" $f
+    sed -i "s/--NODE2--/$NODE2/g" $f
+    sed -i "s/--NODE3--/$NODE3/g" $f
+    sed -i "s/--NODE4--/$NODE4/g" $f
+    sed -i "s/--NODE5--/$NODE5/g" $f
+    sed -i "s/--NODE6--/$NODE6/g" $f
+    sed -i "s/--NODE7--/$NODE7/g" $f
+    sed -i "s/--NODE8--/$NODE8/g" $f
+    sed -i "s/--NODE9--/$NODE9/g" $f
+  fi
+done

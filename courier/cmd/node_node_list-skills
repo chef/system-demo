@@ -13,7 +13,7 @@ fi
 if [ -z "$2" ]; then
     export status="OK"
 else
-  curl -s $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/$1 | jq ".data.installed_skills[] | select(.name==\""$2"\") | ."
+  curl -s $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/$1 | jq ".installed_skills[] | select(.name==\""$2"\") | ."
   exit 0;
 fi
 
@@ -22,7 +22,7 @@ fi
 if [ -z "$1" ]; then
     export status="OK"
 else
-  curl -s $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/$1 | jq '.data.installed_skills'
+  curl -s $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/$1 | jq '.installed_skills'
   exit 0;
 fi
 

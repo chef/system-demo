@@ -33,7 +33,7 @@ fi
 if [ -z "$1" ]; then
     export status="OK"
 else
-  curl -s $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/$1 | jq '{ id: .data.id, hostname: (.data.attributes[] | select(.name=="hostname") | .value)}'
+  curl -s $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/$1 | jq '{ id: .id, hostname: (.attributes[] | select(.name=="hostname") | .value)}'
   exit 0;
 fi
 
