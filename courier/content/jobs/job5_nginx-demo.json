@@ -25,125 +25,155 @@
     "accessMode": "agent",
     "steps": [
       {
-        "command": [
-          "which nginx && echo true || echo false"
+          "interpreter": {
+              "name": "chef/courier-interpreter/os/shell",
+              "min_version": "1.0.0",
+              "max_version": "0.0.1"
+          },
+          "command": [
+              "which nginx >/dev/null && echo true || echo false"
           ],
           "outputFieldRules": {
-            "NGINX_FOUND": {
-              "name": "NGINX_FOUND",
-              "source": "stdout",
-              "sourceType": "output",
-              "extractMethod": "content",
-              "expression": "",
-              "required": true,
-              "sensitive": false
-            }
+              "NGINX_FOUND": {
+                  "name": "NGINX_FOUND",
+                  "source": "stdout",
+                  "sourceType": "output",
+                  "extractMethod": "content",
+                  "expression": "",
+                  "required": true,
+                  "sensitive": false
+              }
           },
           "retryCount": 2,
           "failureBehavior": {
-            "action": "retryThenFail",
-            "retryBackoffStrategy": {
-              "name": "linear",
-              "delaySeconds": 1,
-              "arguments": []
-            }
+              "action": "retryThenFail",
+              "retryBackoffStrategy": {
+                  "name": "linear",
+                  "delaySeconds": 1,
+                  "arguments": []
+              }
           },
-          "limits": {}
+          "limits": {},
+          "stepNumber": 1
       },
       {
-        "expectedInputs": {
-          "NGINX_FOUND": {
-            "type": "string",
-            "sensitive": false,
-            "required": true,
-            "default": ""
-          }
-        },
-        "conditions": [
-          {
-            "inputName": "NGINX_FOUND",
-            "operator": "eq",
-            "value": "false"
-          }
-        ],
-        "command": [
-          "yum install nginx -y",
-          "systemctl enable nginx",
-          "systemctl start nginx"
-        ],
-        "retryCount": 2,
-        "failureBehavior": {
-          "action": "retryThenFail",
-          "retryBackoffStrategy": {
-            "name": "linear",
-            "delaySeconds": 1,
-            "arguments": []
-          }
-        },
-        "limits": {}
+          "interpreter": {
+              "name": "chef/courier-interpreter/os/shell",
+              "min_version": "1.0.0",
+              "max_version": "0.0.1"
+          },
+          "expectedInputs": {
+              "NGINX_FOUND": {
+                  "type": "string",
+                  "sensitive": false,
+                  "required": true,
+                  "default": ""
+              }
+          },
+          "conditions": [
+              {
+                  "inputName": "NGINX_FOUND",
+                  "operator": "eq",
+                  "value": "false\n"
+              }
+          ],
+          "command": [
+              "yum install nginx -y",
+              "systemctl enable nginx",
+              "systemctl start nginx"
+          ],
+          "retryCount": 2,
+          "failureBehavior": {
+              "action": "retryThenFail",
+              "retryBackoffStrategy": {
+                  "name": "linear",
+                  "delaySeconds": 1,
+                  "arguments": []
+              }
+          },
+          "limits": {},
+          "stepNumber": 2
       },
       {
-        "command": [
-          "curl -s http://localhost:80 | grep -q 'hello world!' && echo true || echo false"
+          "interpreter": {
+              "name": "chef/courier-interpreter/os/shell",
+              "min_version": "1.0.0",
+              "max_version": "0.0.1"
+          },
+          "command": [
+              "curl -s http://localhost:80 | grep 'hello world!' >/dev/null && echo true || echo false"
           ],
           "outputFieldRules": {
-            "EXPECTED_PAGE_FOUND": {
-              "name": "EXPECTED_PAGE_FOUND",
-              "source": "stdout",
-              "sourceType": "output",
-              "extractMethod": "content",
-              "expression": "",
-              "required": true,
-              "sensitive": false
-            }
+              "EXPECTED_PAGE_FOUND": {
+                  "name": "EXPECTED_PAGE_FOUND",
+                  "source": "stdout",
+                  "sourceType": "output",
+                  "extractMethod": "content",
+                  "expression": "",
+                  "required": true,
+                  "sensitive": false
+              }
           },
           "retryCount": 2,
           "failureBehavior": {
-            "action": "retryThenFail",
-            "retryBackoffStrategy": {
-              "name": "linear",
-              "delaySeconds": 1,
-              "arguments": []
-            }
+              "action": "retryThenFail",
+              "retryBackoffStrategy": {
+                  "name": "linear",
+                  "delaySeconds": 1,
+                  "arguments": []
+              }
           },
-          "limits": {}
+          "limits": {},
+          "stepNumber": 3
       },
       {
-        "conditions": [
-          {
-            "inputName": "EXPECTED_PAGE_FOUND",
-            "operator": "eq",
-            "value": "false"
-          }
-        ],
-        "command": [
-          "echo '<html><body><h1>hello world</h1></body></html>' | sudo tee /usr/share/nginx/html/index.html > /dev/null"
+          "interpreter": {
+              "name": "chef/courier-interpreter/os/shell",
+              "min_version": "1.0.0",
+              "max_version": "0.0.1"
+          },
+          "conditions": [
+              {
+                  "inputName": "EXPECTED_PAGE_FOUND",
+                  "operator": "eq",
+                  "value": "false\n"
+              }
+          ],
+          "command": [
+              "echo '<html><body><h1>hello world!</h1></body></html>' | sudo tee /usr/share/nginx/html/index.html > /dev/null"
           ],
           "retryCount": 2,
           "failureBehavior": {
-            "action": "retryThenFail",
-            "retryBackoffStrategy": {
-              "name": "linear",
-              "delaySeconds": 1,
-              "arguments": []
-            }
+              "action": "retryThenFail",
+              "retryBackoffStrategy": {
+                  "name": "linear",
+                  "delaySeconds": 1,
+                  "arguments": []
+              }
           },
-          "limits": {}
+          "limits": {},
+          "stepNumber": 4
       },
       {
-        "command": [
-          "curl -s http://localhost:80 | grep -q 'hello world!'"
+          "interpreter": {
+              "name": "chef/courier-interpreter/os/shell",
+              "min_version": "1.0.0",
+              "max_version": "0.0.1"
+          },
+          "command": [
+              "curl -s http://localhost:80 | grep 'hello world!'"
           ],
           "retryCount": 2,
           "failureBehavior": {
-            "action": "retryThenFail",
-            "retryBackoffStrategy": {
-              "name": "linear",
-              "delaySeconds": 1,
-              "arguments": []
-            }
+              "action": "retryThenFail",
+              "retryBackoffStrategy": {
+                  "name": "linear",
+                  "delaySeconds": 1,
+                  "arguments": []
+              }
           },
-          "limits": {}
+          "limits": {},
+          "stepNumber": 5
       }
     ]
   }
