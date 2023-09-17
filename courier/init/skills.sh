@@ -1,4 +1,4 @@
-#!/bin/bash -xe   
+#!/bin/bash 
 echo "waiting for node API to be online"
 curl --retry 18 --retry-delay 10 -s -o /dev/null "http://$1:9676/v1/nodes/"              
 function register() {

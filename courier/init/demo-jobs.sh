@@ -1,4 +1,4 @@
-#!/bin/bash -xe   
+#!/bin/bash   
 echo "waiting for node API to be online"
 curl --retry 18 --retry-delay 10 -s -o /dev/null "http://$1:9676/v1/nodes/"              
 function find() {
@@ -34,19 +34,22 @@ do
   fi
 done
 
-shopt -s globstar
-FILES="/home/ec2-user/demos/**/*.json"
-for i in $FILES; do # Whitespace-safe and recursive
-  if [ -f "$f" ]
-  then
-    sed -i "s/--NODE1--/$NODE1/g" $f
-    sed -i "s/--NODE2--/$NODE2/g" $f
-    sed -i "s/--NODE3--/$NODE3/g" $f
-    sed -i "s/--NODE4--/$NODE4/g" $f
-    sed -i "s/--NODE5--/$NODE5/g" $f
-    sed -i "s/--NODE6--/$NODE6/g" $f
-    sed -i "s/--NODE7--/$NODE7/g" $f
-    sed -i "s/--NODE8--/$NODE8/g" $f
-    sed -i "s/--NODE9--/$NODE9/g" $f
-  fi
+DIRECTORY="/home/ec2-user/demos/*"
+for d in $DIRECTORY; do # Whitespace-safe and recursive
+  echo "checking $d"
+    for f in $DIRECTORY/*.json; do # Whitespace-safe and recursive
+        echo "processing $f"
+        if [ -f "$f" ]
+        then
+            sed -i "s/--NODE1--/$NODE1/g" $f
+            sed -i "s/--NODE2--/$NODE2/g" $f
+            sed -i "s/--NODE3--/$NODE3/g" $f
+            sed -i "s/--NODE4--/$NODE4/g" $f
+            sed -i "s/--NODE5--/$NODE5/g" $f
+            sed -i "s/--NODE6--/$NODE6/g" $f
+            sed -i "s/--NODE7--/$NODE7/g" $f
+            sed -i "s/--NODE8--/$NODE8/g" $f
+            sed -i "s/--NODE9--/$NODE9/g" $f
+        fi
+    done
 done
