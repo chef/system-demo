@@ -1,0 +1,8 @@
+name: audit-action
+title: Audit GitHub actions
+summary: An Example inspec compliance profile used to Audit a github action pipeline
+maintainer: Chef
+copyright: Chef
+copyright_email: demos@chef.io
+license: Apache-2.0
+version: 0.1.0
