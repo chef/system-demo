@@ -17,6 +17,8 @@ ln -s /opt/demo/courier /usr/bin/
 
 echo "copy instructions"
 cp instructions.txt /home/ec2-user/
+echo "copy instructions markdown"
+cp instructions.md /home/ec2-user/
 echo "copy commands"
 cp commands.txt /home/ec2-user/
 echo "copy content"
@@ -32,10 +34,12 @@ chmod -R a+r /home/ec2-user/notes
 chown -R ec2-user:ec2-user /home/ec2-user/content
 chown -R ec2-user:ec2-user /home/ec2-user/notes
 chown -R ec2-user:ec2-user /home/ec2-user/instructions.txt
+chown -R ec2-user:ec2-user /home/ec2-user/instructions.md
 chown -R ec2-user:ec2-user /home/ec2-user/commands.txt
 
 echo "fix file permisions"
 chmod a+r /home/ec2-user/instructions.txt
+chmod a+r /home/ec2-user/instructions.md
 chmod a+r /home/ec2-user/commands.txt
 
 echo "init nodes"
