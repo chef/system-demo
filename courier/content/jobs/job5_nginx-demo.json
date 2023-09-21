@@ -78,9 +78,9 @@
               }
           ],
           "command": [
-              "yum install nginx -y",
-              "systemctl enable nginx",
-              "systemctl start nginx"
+              "yum install nginx -y 2>&1 >/dev/null",
+              "systemctl enable nginx 2>&1 >/dev/null",
+              "systemctl start nginx 2>&1 >/dev/null"
           ],
           "retryCount": 2,
           "failureBehavior": {
