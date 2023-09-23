@@ -7,7 +7,7 @@ property :user, String
 load_current_value do |new_resource|
     backend = TargetModeHelper.new(__transport_connection)
 
-    expect = switch_user.user
+    expect = new_resource.user
     tmp = backend.run_command( "whoami || echo -n") 
     if tmp.match(expect)
         user new_resource.user 

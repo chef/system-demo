@@ -4,6 +4,7 @@
 #
 # Copyright:: 2023, The Authors, All Rights Reserved.
 
-yum 'yum-gi' do
-    package         'git'
-end
+resources:
+- type: yum
+  name: "git"
+  package: 'git'

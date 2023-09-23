@@ -20,7 +20,7 @@ action :create do
     backend = TargetModeHelper.new(__transport_connection)
 
     converge_if_changed :package do
-        backend.run_command("opkg update")
-        backend.run_command("opkg install %s || echo -n", new_resource.package)
+        #backend.run_command(" update")
+        backend.run_command("sudo yum install %s || echo -n", new_resource.package)
     end
 end
