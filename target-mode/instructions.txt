@@ -1,1 +1,7 @@
 TBD
+
+change to the demo directory and run 
+chef-client -z -t 192.168.10.10 -o
+
+you can connect to a remote node by running ~/nodes/node-1.sh or ~/nodes/node-2.sh
+
