@@ -9,7 +9,7 @@ property :package, String #, name_property: true
 load_current_value do |new_resource|
     backend = TargetModeHelper.new(__transport_connection)
 
-    tmp = backend.run_command("yum list installed bind %s || echo -n", new_resource.package)
+    tmp = backend.run_command("yum list installed %s || echo -n", new_resource.package)
     if tmp.match(Regexp.new(new_resource.package))
         package new_resource.package 
     end
@@ -21,6 +21,6 @@ action :create do
 
     converge_if_changed :package do
         #backend.run_command(" update")
-        backend.run_command("sudo yum install %s || echo -n", new_resource.package)
+        backend.run_command("sudo yum install %s -y || echo -n", new_resource.package)
     end
 end

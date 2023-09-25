@@ -18,4 +18,4 @@ chef_version '>= 16.0'
 #
 # source_url 'https://github.com/<insert_org_here>/linux'
 
-depends "target-mode-helper"
+depends "linux"
