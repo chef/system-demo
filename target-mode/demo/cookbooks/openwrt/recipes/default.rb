@@ -48,7 +48,7 @@ openwrt_uci_firewall 'Block-FTP' do
     dest		'lan'
     dest_port	'21'
     target	    'REJECT'
-#    notifies :commit, "openwrt_uci_apply[commit]", :immediately
+    notifies :commit, "openwrt_uci_apply[commit]", :immediately
 end
 
 openwrt_uci_apply 'commit' do

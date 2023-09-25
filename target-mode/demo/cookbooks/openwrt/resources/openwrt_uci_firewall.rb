@@ -14,6 +14,7 @@ property :dest_ip	#'194.25.2.129'
 property :dest_port	#'120'
 property :proto		#'tcp'
 property :target	#'REJECT'
+property :enabled	#'0'
 
 # Load the current value for content and mode
 load_current_value do |new_resource|
@@ -46,6 +47,7 @@ load_current_value do |new_resource|
                 dest_port attribs[2] if attribs[1] == "dest_port"
                 proto attribs[2] if attribs[1] == "proto"
                 target attribs[2] if attribs[1] == "target"
+                enabled attribs[2] if attribs[1] == "enabled"
             end
         end
 
@@ -84,6 +86,8 @@ action :create do
         backend.run_command( "uci set firewall.@rule[%s].%s='%s'", index, "dest_port", new_resource.dest_port, debug: echo)   if property_is_set?(:dest_port)
         backend.run_command( "uci set firewall.@rule[%s].%s='%s'", index, "proto", new_resource.proto, debug: echo)           if property_is_set?(:proto)
         backend.run_command( "uci set firewall.@rule[%s].%s='%s'", index, "target", new_resource.target, debug: echo)         if property_is_set?(:target)
+        backend.run_command( "uci set firewall.@rule[%s].%s='%s'", index, "enabled", new_resource.enabled, debug: echo)       if property_is_set?(:enabled)
+
     end
 
 end
