@@ -15,7 +15,7 @@
         "distributionMethod":"rolling",
         "nodeListType":"nodes",
         "nodeIdentifiers": [
-          "8e808f12-d8de-42d6-ad4a-06614594ee9a"
+          "--NODE1--"
           ]
       }
     ]
