@@ -4,6 +4,6 @@
 #
 # Copyright:: 2023, The Authors, All Rights Reserved.
 
-yum 'yum-gi' do
-    package         'git'
+yum 'yum-git' do
+    package 'git'
 end
