@@ -1,5 +1,5 @@
-
 #!/bin/bash 
+set -x
 KEY=$4                  #"apiuser"
 SECRET=$3               #"b15606a050a60b5f"
 SERVER=$1               #"http://192.168.1.10"
