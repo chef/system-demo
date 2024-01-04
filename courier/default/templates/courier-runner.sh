@@ -1,9 +1,9 @@
 
 #!/bin/bash 
-KEY=%4                  #"apiuser"
-SECRET=%3               #"b15606a050a60b5f"
-SERVER=%1               #"http://192.168.1.10"
-NODE_MANAGER_PORT=%2    #"9676"
+KEY=$4                  #"apiuser"
+SECRET=$3               #"b15606a050a60b5f"
+SERVER=$1               #"http://192.168.1.10"
+NODE_MANAGER_PORT=$2    #"9676"
 
 sed -i "s|--API-KEY--|${KEY}|g" courier-runner-default-settings.json 
 sed -i "s|--API-SECRET--|${SECRET}|g" courier-runner-default-settings.json 
