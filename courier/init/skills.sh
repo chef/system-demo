@@ -16,3 +16,6 @@ do
     register $1 $f
   fi
 done
+
+#cd "/home/ec2-user/system-demo/courier/default/templates"
+#./courier-runner.sh
