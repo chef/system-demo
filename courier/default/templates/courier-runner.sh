@@ -28,10 +28,10 @@ sed -i "s|--API-SECRET--|${SECRET}|g" chef-gohai-default-settings.json
 sed -i "s|--SERVER--|${PUBLIC_SERVER}|g" chef-gohai-default-settings.json 
 
 TEMPLATE=$(cat chef-gohai.tmpl | base64 -w 0)
-sed -i "s|--TEMPLATE--|${TEMPLATE}|g" courier-runner.json
+sed -i "s|--TEMPLATE--|${TEMPLATE}|g" chef-gohai-default-settings.json
 
 curl -X POST -H "Content-Type: application/json" -d @"chef-gohai.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/skills/
-curl -X PUT -H "Content-Type: application/json" -d @"chef-gohai.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/default-settings/skill/chef-gohai
+curl -X PUT -H "Content-Type: application/json" -d @"chef-gohai-default-settings.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/default-settings/skill/chef-gohai
 
 # --------------
 # Shell
