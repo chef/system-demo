@@ -1,0 +1,69 @@
+#!/bin/bash
+if [ -z "$PLATFORM_URL" ]; then
+  echo "PLATFORM_URL is not configured"
+  exit 1
+fi
+
+if [ -z "$1" ]; then
+  echo "usage: node register <UUID>"
+  exit 1
+fi
+
+if [ $1 == "--help" ]; then
+  echo "usage: node register <UUID>"
+  echo "this is a special command used for Private Preview only to register an external node with the system"
+  echo "this must be done after node management is installed"
+  echo "Flags"
+  echo "--help"
+  exit 0
+fi
+
+function addSkill() {
+    NODEID=$1
+    SKILL=$2
+    PACKAGE=$(curl -s https://bldr.habitat.sh/v1/depot/pkgs/chef-platform/$SKILL/latest | jq -c -r '.ident')
+    VERSION=$(echo $PACKAGE | jq -c -r '.version')
+    RELEASE=$(echo $PACKAGE | jq -c -r '.release')
+
+    export BODY="{\"name\": \"$SKILL\",\"canister\": {\"version\": \"$VERSION\",\"release\": \"$RELEASE\"}}"
+    curl -s -X PUT -H 'Content-Type: application/json' $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/${NODEID}-NO/skills/add -d "{\"name\": \"$SKILL\",\"canister\": {\"version\": \"$VERSION\",\"release\": \"$RELEASE\"}}" | jq
+}
+
+SETTING_GROUP=1
+NODE=$(curl -s $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/$1)
+OS=$(echo $NODE | jq -c -r '(.attributes[] | select(.name=="kernel_name") | .value)')
+
+HOSTNAME=$(echo $NODE | jq -c -r '(.attributes[] | select(.name=="hostname") | .value)')
+
+PATTERN="ip-192-168-(10|20|30)-([0-9]+).us-east-2.compute.internal"
+if [[ "$HOSTNAME" =~ $PATTERN ]]; then
+    echo "Error: you can not register the default nodes deployed with Courier Private Preview"
+    exit 1;
+fi
+
+if [ "$OS" == "Linux" ]; then
+SETTING_GROUP=2
+fi
+
+if [ "$OS" == "Windows" ]; then
+SETTING_GROUP=3
+fi
+
+if [ "$SETTING_GROUP" == "1" ]; then
+  if [ "$2" == "" ]; then
+    echo "Error: can not auto detect OS version. Please call the command again with the settings group id"
+    echo "2 = linux"
+    echo "3 = windows"
+    echo "usage: node register $1 <SETTINGS>"
+    exit 1;
+  else
+    SETTING_GROUP=$2
+    exit 1;
+  fi
+fi
+
+curl -s -X PATCH -H 'Content-Type: application/json' $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/$1 -d "{\"settings_id\": ${SETTING_GROUP} }"
+
+addSkill $1 "courier-runner"
+addSkill $1 "chef-gohai"
+addSkill $1 "shell-interpreter"

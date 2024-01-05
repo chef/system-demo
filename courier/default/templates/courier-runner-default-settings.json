@@ -18,7 +18,7 @@
     },
     {
         "name": "server",
-        "value": "localhost"
+        "value": "--SERVER--"
     },
     {
         "name": "port",

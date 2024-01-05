@@ -20,11 +20,16 @@ if [ $1 == "node" ]; then
     export CMD="node"
 fi
 
+if [ $1 == "register" ]; then
+    export CMD="register"
+fi
+
 if [ -z "$CMD" ]; then
   echo "$1 is Invalid service"
   echo "Valid options:"
   echo "skill"
   echo "node"
+  echo "register"
   exit 1
 fi
 
