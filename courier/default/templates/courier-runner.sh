@@ -1,7 +1,7 @@
 #!/bin/bash 
 set -x
-KEY=$4                  #"apiuser"
-SECRET=$3               #"b15606a050a60b5f"
+KEY=$3                  #"apiuser"
+SECRET=$4               #"b15606a050a60b5f"
 SERVER=$1               #"http://192.168.1.10"
 NODE_MANAGER_PORT=$2    #"9676"
 PUBLIC_SERVER=$5    #"https://my.demo.chef.co"
