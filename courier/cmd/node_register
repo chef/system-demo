@@ -19,13 +19,25 @@ if [ $1 == "--help" ]; then
 fi
 
 function addSkill() {
-    NODEID=$1
-    SKILL=$2
-    PACKAGE=$(curl -s https://bldr.habitat.sh/v1/depot/pkgs/chef-platform/$SKILL/latest | jq -c -r '.ident')
+    ORIGIN=$1
+    NODEID=$2
+    SKILL=$3
+    PLATFORM=$4
+    PACKAGE=$(curl -s https://bldr.habitat.sh/v1/depot/pkgs/$ORIGIN/$SKILL/latest?target=$PLATFORM)
+    #echo $PACKAGE | jq
+    PACKAGE=$(echo $PACKAGE | jq -c -r '.ident')
+
     VERSION=$(echo $PACKAGE | jq -c -r '.version')
     RELEASE=$(echo $PACKAGE | jq -c -r '.release')
+    #echo $PACKAGE
 
-    export BODY="{\"name\": \"$SKILL\",\"canister\": {\"version\": \"$VERSION\"}}"
+    #PACKAGE=$(curl https://bldr.habitat.sh/v1/depot/pkgs/$ORIGIN/$SKILL/$VERSION | jq)
+    #PACKAGE=$(curl -s https://bldr.habitat.sh/v1/depot/pkgs/$ORIGIN/$SKILL/$VERSION | jq -c '.data[] | select(.platforms[] == "x86_64-windows") | { origin: .origin, name: .name, version: .version, release: .release, platform: .platforms[0] }')
+    #VERSION=$(echo $PACKAGE | jq -c -r '.version')
+    #RELEASE=$(echo $PACKAGE | jq -c -r '.release')
+    #echo $PACKAGE
+
+    export BODY="{\"name\": \"$SKILL\",\"canister\": {\"version\": \"$VERSION\", \"release\": \"$RELEASE\"}}"
     
     echo "--- adding ---"
     echo $BODY | jq
@@ -68,6 +80,14 @@ fi
 
 curl -s -X PATCH -H 'Content-Type: application/json' $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/$1 -d "{\"settings_id\": ${SETTING_GROUP} }"
 
-addSkill $1 "courier-runner"
-addSkill $1 "chef-gohai"
-addSkill $1 "shell-interpreter"
+if [ "$SETTING_GROUP" == "2" ]; then
+  PLATFORM="x86_64-linux"
+fi
+
+if [ "$SETTING_GROUP" == "3" ]; then
+  PLATFORM="x86_64-windows"
+fi
+
+addSkill "chef-platform" $1 "courier-runner" $PLATFORM
+addSkill "chef" $1 "chef-gohai" $PLATFORM
+addSkill "chef-platform" $1 "shell-interpreter" $PLATFORM

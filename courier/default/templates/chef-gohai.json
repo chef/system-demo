@@ -1,7 +1,7 @@
 {
   "name": "chef-gohai",
   "canister": {
-    "origin": "chef",
+    "origin": "chef-platform",
     "name": "chef-gohai",
     "service": true
   },
