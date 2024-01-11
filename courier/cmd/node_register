@@ -25,7 +25,11 @@ function addSkill() {
     VERSION=$(echo $PACKAGE | jq -c -r '.version')
     RELEASE=$(echo $PACKAGE | jq -c -r '.release')
 
-    export BODY="{\"name\": \"$SKILL\",\"canister\": {\"version\": \"$VERSION\"}"
+    export BODY="{\"name\": \"$SKILL\",\"canister\": {\"version\": \"$VERSION\"}}"
+    
+    echo "--- adding ---"
+    echo $BODY | jq
+
     curl -s -X PUT -H 'Content-Type: application/json' $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/${NODEID}/skills/add -d "{\"name\": \"$SKILL\",\"canister\": {\"version\": \"$VERSION\",\"release\": \"$RELEASE\"}}" | jq
 }
 
