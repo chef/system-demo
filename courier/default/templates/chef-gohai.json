@@ -10,7 +10,7 @@
             "content": "--TEMPLATE--",
             "file_name": "user.toml",
             "file_path": "/hab/user/chef-gohai/config",
-            "windows_file_path": "c:\\hab\\user\\cchefurier-gohai\\config"
+            "windows_file_path": "c:\\hab\\user\\chef-gohai\\config"
         }
       ]
 }

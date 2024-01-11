@@ -26,7 +26,7 @@ function addSkill() {
     RELEASE=$(echo $PACKAGE | jq -c -r '.release')
 
     export BODY="{\"name\": \"$SKILL\",\"canister\": {\"version\": \"$VERSION\",\"release\": \"$RELEASE\"}}"
-    curl -s -X PUT -H 'Content-Type: application/json' $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/${NODEID}-NO/skills/add -d "{\"name\": \"$SKILL\",\"canister\": {\"version\": \"$VERSION\",\"release\": \"$RELEASE\"}}" | jq
+    curl -s -X PUT -H 'Content-Type: application/json' $PLATFORM_URL:$NODE_MANAGER_PORT/v1/nodes/${NODEID}/skills/add -d "{\"name\": \"$SKILL\",\"canister\": {\"version\": \"$VERSION\",\"release\": \"$RELEASE\"}}" | jq
 }
 
 SETTING_GROUP=1
