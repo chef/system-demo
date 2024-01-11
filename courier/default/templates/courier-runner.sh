@@ -21,6 +21,8 @@ curl -X PUT -H "Content-Type: application/json" -d @"courier-runner-default-sett
 curl -X POST -H "Content-Type: application/json" -d @"courier-runner-linux-settings.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/settings/
 curl -X POST -H "Content-Type: application/json" -d @"courier-runner-windows-settings.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/settings/
 
+
+echo "*********************** START GOHAI"
 # --------------
 # Gohai
 sed -i "s|--API-KEY--|${KEY}|g" chef-gohai-default-settings.json 
@@ -29,6 +31,9 @@ sed -i "s|--SERVER--|${PUBLIC_SERVER}|g" chef-gohai-default-settings.json
 
 TEMPLATE=$(cat chef-gohai.tmpl | base64 -w 0)
 sed -i "s|--TEMPLATE--|${TEMPLATE}|g" chef-gohai-default-settings.json
+
+echo "----- DUMP -----"
+cat chef-gohai-default-settings.json
 
 curl -X POST -H "Content-Type: application/json" -d @"chef-gohai.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/skills/
 curl -X PUT -H "Content-Type: application/json" -d @"chef-gohai-default-settings.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/default-settings/skill/chef-gohai
