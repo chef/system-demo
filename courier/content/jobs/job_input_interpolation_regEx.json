@@ -1,0 +1,160 @@
+{
+    "name": "external_api_example",
+    "description": "A job demonstrate how courier can hit external APIs and execute steps conditionally based on response",
+    "immediate": true,
+    "exceptionRules": [],
+    "target": {
+      "executionType": "sequential",
+      "groups": [
+        {
+          "timeoutSeconds": 160,
+          "batchSize": {
+            "type": "number",
+            "value": 1
+          },
+          "distributionMethod":"rolling",
+          "successCriteria": [{ "numRuns": { "type": "percent", "value": 100 }, "status": "success" }],
+          "nodeListType":"nodes",
+          "nodeIdentifiers": [
+            "--NODE1--"
+            ]
+        }
+      ]
+    },
+    "timeoutSeconds": 300,
+    "actions": {
+      "accessMode": "agent",
+      "steps": [
+        {
+            "interpreter": {
+                "name": "chef/courier-interpreter/os/shell",
+                "min_version": "1.0.0",
+                "max_version": "0.0.1"
+            },
+            "command": [
+                "curl https://jsonplaceholder.typicode.com/users/1 | grep -o 'Sincere@april.biz'"
+            ],
+            "outputFieldRules": {
+                "CAN_PERFORM_TASK": {
+                    "name": "CAN_PERFORM_TASK",
+                    "source": "stdout",
+                    "sourceType": "output",
+                    "extractMethod": "regEx",
+                    "expression": "Sincere@april.biz",
+                    "required": true,
+                    "sensitive": false
+                }
+            },
+            "retryCount": 2,
+            "failureBehavior": {
+                "action": "retryThenFail",
+                "retryBackoffStrategy": {
+                    "name": "linear",
+                    "delaySeconds": 1,
+                    "arguments": []
+                }
+            },
+            "limits": {},
+            "stepNumber": 1
+        },
+        {
+            "interpreter": {
+                "name": "chef/courier-interpreter/os/shell",
+                "min_version": "1.0.0",
+                "max_version": "0.0.1"
+            },
+            "expectedInputs": {
+                "CAN_PERFORM_TASK": {
+                    "type": "string",
+                    "sensitive": false,
+                    "required": true,
+                    "default": "true"
+                }
+            },
+            "conditions": [
+                {
+                    "inputName": "CAN_PERFORM_TASK",
+                    "operator": "eq",
+                    "value": "Sincere@april.biz"
+                }
+            ],
+            "command": [
+                "echo {{.CAN_PERFORM_TASK}} > task.txt"
+            ],
+            "retryCount": 2,
+            "failureBehavior": {
+                "action": "retryThenFail",
+                "retryBackoffStrategy": {
+                    "name": "linear",
+                    "delaySeconds": 1,
+                    "arguments": []
+                }
+            },
+            "limits": {},
+            "stepNumber": 2
+        },
+        {
+            "interpreter": {
+                "name": "chef/courier-interpreter/os/shell",
+                "min_version": "1.0.0",
+                "max_version": "0.0.1"
+            },
+            "command": [
+                "cat task.txt"
+            ],
+            "outputFieldRules": {
+                "TASK_COMPLETED": {
+                    "name": "TASK_COMPLETED",
+                    "source": "stdout",
+                    "sourceType": "output",
+                    "extractMethod": "content",
+                    "expression": "",
+                    "required": true,
+                    "sensitive": false
+                }
+            },
+            "retryCount": 2,
+            "failureBehavior": {
+                "action": "retryThenFail",
+                "retryBackoffStrategy": {
+                    "name": "linear",
+                    "delaySeconds": 1,
+                    "arguments": []
+                }
+            },
+            "limits": {},
+            "stepNumber": 3
+        },
+        {
+            "interpreter": {
+                "name": "chef/courier-interpreter/os/shell",
+                "min_version": "1.0.0",
+                "max_version": "0.0.1"
+            },
+            "conditions": [
+                {
+                    "inputName": "TASK_COMPLETED",
+                    "operator": "eq",
+                    "value": "done\n"
+                }
+            ],
+            "command": [
+                "sleep 1"
+            ],
+            "retryCount": 2,
+            "failureBehavior": {
+                "action": "retryThenFail",
+                "retryBackoffStrategy": {
+                    "name": "linear",
+                    "delaySeconds": 1,
+                    "arguments": []
+                }
+            },
+            "limits": {},
+            "stepNumber": 4
+        }
+      ]
+    }
+  }
+  
+  

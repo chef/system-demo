@@ -1,0 +1,128 @@
+{
+    "name": "external_api_example",
+    "description": "A job t demonstrate how courier can hit external APIs and execute steps conditionally based on response",
+    "immediate": true,
+    "exceptionRules": [],
+    "target": {
+      "executionType": "sequential",
+      "groups": [
+        {
+          "timeoutSeconds": 160,
+          "batchSize": {
+            "type": "number",
+            "value": 1
+          },
+          "distributionMethod":"rolling",
+          "successCriteria": [{ "numRuns": { "type": "percent", "value": 100 }, "status": "success" }],
+          "nodeListType":"nodes",
+          "nodeIdentifiers": [
+            "--NODE1--"
+            ]
+        }
+      ]
+    },
+    "timeoutSeconds": 300,
+    "actions": {
+      "accessMode": "agent",
+      "steps": [
+        {
+            "interpreter": {
+                "name": "chef/courier-interpreter/os/shell",
+                "min_version": "1.0.0",
+                "max_version": "0.0.1"
+            },
+            "command": [
+                "echo '{\"key1\":\"value1\",\"key2\":\"value2\"}' > file1.json"
+            ],
+            "outputFieldRules": {
+                "out": {
+                    "name": "out",
+                    "source": "file1.json",
+                    "sourceType": "artifact",
+                    "extractMethod": "jsonPath",
+                    "expression":"key1",
+                    "required": true,
+                    "sensitive": false
+                },
+                "out1": {
+                    "name": "out1",
+                    "source": "file1.json",
+                    "sourceType": "artifact",
+                    "extractMethod": "regEx",
+                    "expression":"value1",
+                    "required": true,
+                    "sensitive": false
+                },
+                "out2": {
+                    "name": "out2",
+                    "source": "file1.json",
+                    "sourceType": "artifact",
+                    "extractMethod": "content",
+                    "expression":"",
+                    "required": true,
+                    "sensitive": false
+                }
+            },
+            "retryCount": 2,
+            "failureBehavior": {
+                "action": "retryThenFail",
+                "retryBackoffStrategy": {
+                    "name": "linear",
+                    "delaySeconds": 1,
+                    "arguments": []
+                }
+            },
+            "limits": {},
+            "stepNumber": 1
+        },
+        {
+            "interpreter": {
+                "name": "chef/courier-interpreter/os/shell",
+                "min_version": "1.0.0",
+                "max_version": "0.0.1"
+            },
+            "expectedInputs": {
+                "out": {
+                    "type": "string",
+                    "sensitive": false,
+                    "required": false,
+                    "default": "random"
+                }
+            },
+            "conditions": [
+                {
+                    "inputName": "out",
+                    "operator": "eq",
+                    "value": "value1"
+                },
+                {
+                    "inputName": "out1",
+                    "operator": "eq",
+                    "value": "value1"
+                },
+                {
+                    "inputName": "out2",
+                    "operator": "contains",
+                    "value": "value1"
+                }
+            ],
+            "command": [
+                "echo {{.out}} > output.txt"
+            ],
+            "retryCount": 2,
+            "failureBehavior": {
+                "action": "retryThenFail",
+                "retryBackoffStrategy": {
+                    "name": "linear",
+                    "delaySeconds": 1,
+                    "arguments": []
+                }
+            },
+            "limits": {},
+            "stepNumber": 2
+        }
+      ]
+    }
+  }
+  
+  
