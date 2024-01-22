@@ -26,7 +26,7 @@
     "steps": [
       {
           "interpreter": {
-              "name": "chef/courier-interpreter/os/shell",
+              "name": "chef-platform/shell-interpreter",
               "min_version": "1.0.0",
               "max_version": "0.0.1"
           },
@@ -58,7 +58,7 @@
       },
       {
           "interpreter": {
-              "name": "chef/courier-interpreter/os/shell",
+              "name": "chef-platform/shell-interpreter",
               "min_version": "1.0.0",
               "max_version": "0.0.1"
           },
@@ -96,7 +96,7 @@
       },
       {
           "interpreter": {
-              "name": "chef/courier-interpreter/os/shell",
+              "name": "chef-platform/shell-interpreter",
               "min_version": "1.0.0",
               "max_version": "0.0.1"
           },
@@ -128,7 +128,7 @@
       },
       {
           "interpreter": {
-              "name": "chef/courier-interpreter/os/shell",
+              "name": "chef-platform/shell-interpreter",
               "min_version": "1.0.0",
               "max_version": "0.0.1"
           },
@@ -156,7 +156,7 @@
       },
       {
           "interpreter": {
-              "name": "chef/courier-interpreter/os/shell",
+              "name": "chef-platform/shell-interpreter",
               "min_version": "1.0.0",
               "max_version": "0.0.1"
           },

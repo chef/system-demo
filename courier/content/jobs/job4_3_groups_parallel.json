@@ -47,7 +47,7 @@
                 {
                     "stepNumber": 1,
                     "interpreter": {
-                        "name": "chef/courier-interpreter/os/shell"
+                        "name": "chef-platform/shell-interpreter"
                     },
                     "command": [
                         "[[ \"$HOSTNAME\" != \"ip-192-168-\"*\"-20\"* ]] || (exit 1)"
@@ -70,7 +70,7 @@
                 {
                     "stepNumber": 2,
                     "interpreter": {
-                        "name": "chef/courier-interpreter/os/shell"
+                        "name": "chef-platform/shell-interpreter"
                     },
                     "command": [
                         "sleep 10"
@@ -93,7 +93,7 @@
                 {
                     "stepNumber": 3,
                     "interpreter": {
-                        "name": "chef/courier-interpreter/os/shell"
+                        "name": "chef-platform/shell-interpreter"
                     },
                     "command": [
                         "[[ \"$HOSTNAME\" != \"ip-192-168-\"*\"-10\"* ]] || (exit 1)"

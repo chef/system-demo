@@ -16,7 +16,7 @@
         "steps": [
             {
                 "interpreter": {
-                    "name": "chef/courier-interpreter/os/shell",
+                    "name": "chef-platform/shell-interpreter",
                     "Version": "1.0"
                 },
                 "command": [
