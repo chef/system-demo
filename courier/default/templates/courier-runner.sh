@@ -23,13 +23,13 @@ echo "CREATE Courier Runner Default settings"
 cat courier-runner-default-settings.json
 curl -X PUT -H "Content-Type: application/json" -d @"courier-runner-default-settings.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/default-settings/skill/courier-runner
 
-echo "CREATE Courier Runner linux settings"
-cat courier-runner-linux-settings.json
-curl -X POST -H "Content-Type: application/json" -d @"courier-runner-linux-settings.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/settings/
+#echo "CREATE Courier Runner linux settings"
+#cat courier-runner-linux-settings.json
+#curl -X POST -H "Content-Type: application/json" -d @"courier-runner-linux-settings.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/settings/
 
-echo "CREATE Courier Runner windows settings"
-cat courier-runner-windows-settings.json
-curl -X POST -H "Content-Type: application/json" -d @"courier-runner-windows-settings.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/settings/
+#echo "CREATE Courier Runner windows settings"
+#cat courier-runner-windows-settings.json
+#curl -X POST -H "Content-Type: application/json" -d @"courier-runner-windows-settings.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/settings/
 
 
 echo "*********************** START GOHAI"
@@ -50,8 +50,30 @@ echo "CREATE Chef gohai default settings"
 cat chef-gohai-default-settings.json
 curl -X PUT -H "Content-Type: application/json" -d @"chef-gohai-default-settings.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/default-settings/skill/chef-gohai
 
+#echo "CREATE Chef gohai linux settings"
+#cat chef-gohai-linux-settings.json
+#curl -X POST -H "Content-Type: application/json" -d @"chef-gohai-linux-settings.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/settings/
+
+#echo "CREATE Chef gohai windows settings"
+#cat chef-gohai-windows-settings.json
+#curl -X POST -H "Content-Type: application/json" -d @"chef-gohai-windows-settings.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/settings/
+
+
 # --------------
 # Shell
 echo "CREATE Courier-shell-interpreter"
 cat courier-shell-interpreter.json
 curl -X POST -H "Content-Type: application/json" -d @"courier-shell-interpreter.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/skills/
+
+
+
+# --------------
+# Default Settings
+
+echo "CREATE linux settings"
+cat linux-settings.json
+curl -X POST -H "Content-Type: application/json" -d @"linux-settings.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/settings/
+
+echo "CREATE windows settings"
+cat windows-settings.json
+curl -X POST -H "Content-Type: application/json" -d @"windows-settings.json" ${SERVER}:${NODE_MANAGER_PORT}/v1/settings/
