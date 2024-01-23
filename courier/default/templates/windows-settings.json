@@ -14,15 +14,15 @@
             "settings": [
                 {
                     "name": "statePath",
-                    "value": ".\\state"
+                    "value": "state"
                 },
                 {
                     "name": "dir",
-                    "value": ".\\error"
+                    "value": "error"
                 },
                 {
                     "name": "reporter_dir",
-                    "value": ".\\step-log"
+                    "value": "step-log"
                 }
             ],
             "skill": "courier-runner"
