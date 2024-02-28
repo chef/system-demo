@@ -18,7 +18,7 @@ load_current_value do |new_resource|
     if tmp.match(Regexp.new(file))
         target new_resource.target 
     end
-end
+end 
 
 
 action :create do
